@@ -1,12 +1,18 @@
-let estudar = prompt("Qual matéria você deseja estudar?")
-let tipo = prompt("O que deseja ver? (conteudo, exemplos, atividades)")
+const prompt = require("prompt-sync")()
 
-let materias = [matematica, portugues, biologia] 
+function materialDeEstudo() {
 
-let matematica = {
+  let estudar = prompt("Qual matéria você deseja estudar?")
+
+  let tipo = prompt("O que deseja ver? (conteudo, exemplos, atividades)")
+
+  
+
+  let matematica = {
 
 conteudos: "maximo e minimo da funçao",
-    explicaçao:`
+
+explicaçao:`
 São pontos onde a função atinge um pico, mas apenas considerando a região próxima.
 
  local Máximo
@@ -29,6 +35,7 @@ Em resumo:
        
         Máximo global → maior valor da função.            Mínimo global → menor valor da função.
 `,
+
 exemplos:
 `
    |
@@ -54,6 +61,7 @@ Máximo = 5 (no x = 2):
       x=2
 
 `,
+
 atividade:`Questão 1 — Básica (Parábola)
 
 Dada a função:
@@ -98,30 +106,42 @@ b) Qual ponto é um mínimo local?
 c) Qual ponto é o máximo global?
 
 `
-
-
-}
-
-
-
-function gerarConteudo(materia) {
-  let composiçao = indiceMateria(materia)
-
-  if (composiçao === -1) {
-    return "Matéria não encontrada. Tente: matematica, portugues ou biologia."
+  }
+  let portugues = {
+    conteudos: "Conteúdos de português...",
+    explicacao: "Explicação...",
+    exemplos: "Exemplos...",
+    atividades: "Atividades..."
   }
 
-  switch (tipo.toLowerCase()) {
-    case "conteudo":
-      return gerarResumo(composiçao)
-
-    case "exemplos":
-      return gerarQuestao(composiçao)
-
-    case "atividades":
-      return gerarFlashcard(composiçao)
-
-    default:
-      return "Tipo inválido! Use: resumo, questoes ou flashcards."
+  let biologia = {
+    conteudos: "Conteúdos de biologia...",
+    explicacao: "Explicação...",
+    exemplos: "Exemplos...",
+    atividades: "Atividades..."
   }
+
+  let materias = {
+    matematica,
+    portugues,
+    biologia
+  }
+
+let materiaEscolhida = materias[estudar]
+if (!materiaEscolhida) {
+  console.log("Matéria não encontrada. Tente: matematica, portugues ou biologia.")
+  return
 }
+
+let tipoEscolhido = tipo
+
+if (!materiaEscolhida[tipoEscolhido]) {
+  console.log("Tipo inválido! Use: conteudo, explicacao, exemplos ou atividades.")
+  return
+}
+
+console.log("\n===== RESULTADO =====\n")
+console.log(materiaEscolhida[tipoEscolhido])
+}
+
+materialDeEstudo()
